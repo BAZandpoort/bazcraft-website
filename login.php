@@ -4,6 +4,7 @@ session_start();
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="css/main.css">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,7 +21,7 @@ session_start();
     }
 
     ?>
-    <h1>Inloggen</h1>
+    <h1 class="center">Inloggen</h1>
     <form action="authenticate.php" method="post">
         <label for="username">Username</label>
         <input type="text" name="username" required>
@@ -28,5 +29,9 @@ session_start();
         <input type="password" name="password" required>
         <input type="submit" value="Inloggen">
     </form>
+
+    <footer>
+        <p>&copy; 2023 BA Zandpoort</p>
+    </footer>
 </body>
 </html>
