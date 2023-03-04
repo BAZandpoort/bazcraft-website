@@ -1,4 +1,16 @@
 <?php
+
+$config = parse_ini_file('config.ini');
+$authusername = $config['username'];
+$authpassword = $config['password'];
+
+/*
+$host = $config['dbhost'];
+$dbusername = $config['dnusername'];
+$dbpassword = $config[dnpassword'];
+$dbname = $config['dbname'];
+*/
+
 session_start();
 
 if (!(isset($_POST["username"]) || isset($_POST["password"]))) {
@@ -21,7 +33,7 @@ $_SESSION["password"] = strip_tags($_POST["password"]);
 <body>
     <?php
 
-    if (!(($_SESSION["username"] == "admin") && ($_SESSION["password"]) == "admin")) {
+    if (!(($_SESSION["username"] == $authusername) && ($_SESSION["password"]) == $authpassword)) {
         $_SESSION["wrong_creds"] = true;
         header("Location:login.php");
         return;
