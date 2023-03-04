@@ -6,12 +6,13 @@ if (!(isset($_POST["username"]) || isset($_POST["password"]))) {
     return;
 }
 
-$_SESSION["username"] = $_POST["username"];
-$_SESSION["password"] = $_POST["password"];
+$_SESSION["username"] = strip_tags($_POST["username"]);
+$_SESSION["password"] = strip_tags($_POST["password"]);
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="css/main.css">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,6 +26,8 @@ $_SESSION["password"] = $_POST["password"];
         header("Location:login.php");
         return;
     }
+
+    $_SESSION["authenticated"] = true;
 
     header("Location:dashboard.php");
     ?>
