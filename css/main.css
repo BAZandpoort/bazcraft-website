@@ -238,3 +238,19 @@ form input[type="submit"]:hover {
     color: #fff;
     text-shadow: 0.2px 0.2px 0.2px #000;
 }
+
+.no-data-text {
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 0.25;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.25;
+    }
+}

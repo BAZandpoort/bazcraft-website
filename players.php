@@ -22,19 +22,22 @@ $users = get_users();
 
 
 <?php
-
-
-foreach ($users as $user) {
-    echo '<div class="card">';
-    echo '<h2 class="card-text">' . $user['playername'] . '</h2>';
-    echo '<p class="card-text"><strong>Room:</strong> ' . getPlayerRoom($user['id']) . '</p>';
-    echo '<p class="card-text"><strong>Age:</strong> ' . $user['age'] . '</p>';
-    echo '<p class="card-text"><strong>ID:</strong> ' . $user['id'] . '</p>';
+if (empty($users)) {
+    echo '<div class="center">';
+    echo '<span class="no-data-text center">No data to display :(</span>';
     echo '</div>';
+} else {
+    foreach ($users as $user) {
+        echo '<div class="card">';
+        echo '<h2 class="card-text">' . $user['playername'] . '</h2>';
+        echo '<p class="card-text"><strong>Room:</strong> ' . getPlayerRoom($user['id']) . '</p>';
+        echo '<p class="card-text"><strong>Age:</strong> ' . $user['age'] . '</p>';
+        echo '<p class="card-text"><strong>ID:</strong> ' . $user['id'] . '</p>';
+        echo '</div>';
+    }
 }
-
-
 ?>
+
 <div class="button-container">
     <button class="dashboard-button button-primary" onclick="window.location.href='dashboard.php'">📖 Dashboard</button>
 </div>
