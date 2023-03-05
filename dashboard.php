@@ -17,7 +17,7 @@ include "auth.php";
     <title>Dashboard - BA Zandpoort</title>
 </head>
 <body>
-    <script>toastr.success("😎 Welcome, <?php echo $_SESSION["username"]; ?>!")</script>
+    <script>"toastr.success("😎 Welcome, <?php echo $_SESSION["username"]; ?>!")</script>
     <h1 class="center">🚀 Dashboard - BA Zandpoort</h1>
     <h3 class="center">👋 Welcome, <?php echo $_SESSION["username"]; ?></h3>
 
