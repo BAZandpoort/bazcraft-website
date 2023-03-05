@@ -15,16 +15,18 @@ session_start();
 </head>
 <body>
 
-    <h1 class="center">Welkom, <?php echo $_SESSION["username"]; ?></h1>
+    <h1 class="center">🚀 Dashboard - BA Zandpoort</h1>
+    <h3 class="center">👋 Welcome, <?php echo $_SESSION["username"]; ?></h3>
 
 
-    <form action="logout.php" method="get">
-        <input type="submit" value="Log uit">
-    </form>
+    <div class="button-container">
+        <button class="dashboard-button button-primary" onclick="window.location.href='players.php'">👥 View Players</button>
+        <button class="dashboard-button button-secondary" onclick="window.location.href='logout.php'">✌️ Log out</button>
+    </div>
 
     <footer>
         <p>&copy; 2023 BA Zandpoort</p>
-        <a href="logout.php">Logout</a>
+        <a href="logout.php">✌️ Log out</a>
     </footer>
 
 </body>

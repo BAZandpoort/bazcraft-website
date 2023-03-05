@@ -1,7 +1,6 @@
-/* class to be able to center text yesyes */
-.center {
-    text-align: center;
-}
+
+
+
 
 
 /* Default font family & dark mode*/
@@ -10,7 +9,6 @@ body {
     background-color: #222;
     color: #eee;
 }
-
 
 /* set links to a different color */
 a {
@@ -23,6 +21,53 @@ a:hover {
     color: #1E90FF;
     text-decoration: underline;
 }
+/* class to be able to center text yesyes */
+.center {
+    text-align: center;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #222;
+    color: #eee;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.dashboard-button{
+    width: 100%;
+    display: inline-block;
+    padding: 12px 24px;
+    margin: 10px 0;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    background-color: #323232;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.button-primary:hover {
+    text-decoration: none;
+    background-color: #007bff;
+    color: inherit;
+}
+
+.button-secondary:hover {
+    text-decoration: none;
+    background-color: #FF0000FF;
+    color: inherit;
+}
+
 
 /* style the header */
 header {
@@ -107,6 +152,10 @@ form label {
 
 form input[type="text"],
 form input[type="password"] {
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
     display: block;
     width: 95%;
     padding: 10px;
@@ -118,6 +167,10 @@ form input[type="password"] {
 }
 
 form input[type="submit"] {
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
     display: block;
     width: 100%;
     padding: 10px;
