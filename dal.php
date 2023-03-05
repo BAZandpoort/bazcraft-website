@@ -57,10 +57,6 @@ function getPlayerRoom($playerId) {
     }
 }
 
-function closeDatabaseConnection() {
-    global $conn;
-    $conn->close();
-}
 
 
 

@@ -2,7 +2,6 @@
 
 include 'dal.php';
 $users = get_users();
-closeDatabaseConnection();
 ?>
 
 
