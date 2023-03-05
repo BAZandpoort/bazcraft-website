@@ -17,7 +17,14 @@ include "auth.php";
     <title>Dashboard - BA Zandpoort</title>
 </head>
 <body>
-    <script>"toastr.success("😎 Welcome, <?php echo $_SESSION["username"]; ?>!")</script>
+    <?php
+    
+    if(!(isset($_COOKIE["toastr_welcome"]))) {
+        echo '<script>toastr.success("😎 Welcome, ' . $_SESSION["username"] . '!")</script>';
+        setcookie("toastr_welcome", true);
+    }
+
+    ?>
     <h1 class="center">🚀 Dashboard - BA Zandpoort</h1>
     <h3 class="center">👋 Welcome, <?php echo $_SESSION["username"]; ?></h3>
 
