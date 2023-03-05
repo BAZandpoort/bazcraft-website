@@ -23,12 +23,17 @@ $lectures = getLectureData();
 
 <?php
 
-
-foreach ($lectures as $lecture) {
-    echo '<div class="card">';
-    echo '<h2 class="card-text">' . $lecture['lecture'] . '</h2>';
-    echo '<p class="card-text"><strong>Using:</strong> ' . $lecture['using'] . '</p>';
+if (empty($lectures)) {
+    echo '<div class="center">';
+    echo '<span class="no-data-text center">No data to display :(</span>';
     echo '</div>';
+} else {
+    foreach ($lectures as $lecture) {
+        echo '<div class="card">';
+        echo '<h2 class="card-text">' . $lecture['lecture'] . '</h2>';
+        echo '<p class="card-text"><strong>Using:</strong> ' . $lecture['using'] . '</p>';
+        echo '</div>';
+    }
 }
 
 
