@@ -58,6 +58,25 @@ function getPlayerRoom($playerId) {
 }
 
 
+function getLectureData() {
+
+    global $conn;
+
+    $sql = "SELECT * FROM lectures";
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+        // output data of each row
+        $lectures = array();
+        while($row = $result->fetch_assoc()) {
+            $lectures[] = $row;
+        }
+        return $lectures;
+    } else {
+        return array();
+    }
+
+}
+
 
 
 
