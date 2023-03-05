@@ -25,8 +25,10 @@ $lectures = getLectureData();
 
 
 foreach ($lectures as $lecture) {
-    $text = sprintf('Lecture: %s | Using: %d', $lecture['lecture'],  $lecture['using']);
-    echo "<p>" . $text . "</p>";
+    echo '<div class="card">';
+    echo '<h2 class="card-text">' . $lecture['lecture'] . '</h2>';
+    echo '<p class="card-text"><strong>Using:</strong> ' . $lecture['using'] . '</p>';
+    echo '</div>';
 }
 
 
