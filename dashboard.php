@@ -32,6 +32,7 @@ include "auth.php";
     <div class="button-container">
         <button class="dashboard-button button-primary" onclick="window.location.href='players.php'">👥 View Players</button>
         <button class="dashboard-button button-primary" onclick="window.location.href='lectureinfo.php'">📕 View lecture info</button>
+        <button class="dashboard-button button-primary" onclick="window.location.href='classinfo.php'">💼 View classes info</button>
         <button class="dashboard-button button-secondary" onclick="window.location.href='logout.php'">✌️ Log out</button>
     </div>
 

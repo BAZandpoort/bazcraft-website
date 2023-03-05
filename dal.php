@@ -31,9 +31,9 @@ function get_users() {
             $users[] = $row;
         }
         return $users;
-    } else {
-        return array();
     }
+    return array();
+
 }
 
 function getPlayerRoom($playerId) {
@@ -52,9 +52,9 @@ function getPlayerRoom($playerId) {
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
         return $row["room"];
-    } else {
-        return null;
     }
+    return null;
+
 }
 
 
@@ -71,12 +71,28 @@ function getLectureData() {
             $lectures[] = $row;
         }
         return $lectures;
-    } else {
-        return array();
     }
+    return array();
+
 
 }
 
+function getClasses() {
+    global $conn;
+
+    $sql = "SELECT * FROM classes";
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+        // output data of each row
+        $lectures = array();
+        while($row = $result->fetch_assoc()) {
+            $lectures[] = $row;
+        }
+        return $lectures;
+    }
+    return array();
+
+}
 
 
 
