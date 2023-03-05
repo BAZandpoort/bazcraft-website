@@ -2,7 +2,7 @@
 session_start();
 include "auth.php";
 include 'dal.php';
-$users = get_users();
+$lectures = getLectureData();
 
 ?>
 
@@ -24,8 +24,8 @@ $users = get_users();
 <?php
 
 
-foreach ($users as $user) {
-    $text = sprintf('Id: %d | Playername: %s | Age: %d | Room: %s', $user['id'],  $user['playername'], $user['age'], getPlayerRoom($user['id']));
+foreach ($lectures as $lecture) {
+    $text = sprintf('Lecture: %s | Using: %d', $lecture['lecture'],  $lecture['using']);
     echo "<p>" . $text . "</p>";
 }
 
