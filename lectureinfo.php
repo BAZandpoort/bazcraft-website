@@ -3,7 +3,13 @@ session_start();
 include "auth.php";
 include 'dal.php';
 $lectures = getLectureData();
+// Define the sort function
+function sortLectures($a, $b) {
+    return ($a['using'] < $b['using']) ? 1 : -1;
+}
 
+// Sort the classes array
+usort($lectures, "sortLectures");
 ?>
 
 

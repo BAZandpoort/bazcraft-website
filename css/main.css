@@ -187,13 +187,10 @@ form input[type="submit"]:hover {
 }
 
 
-.container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-}
+
 
 .card {
+    display: inline-block;
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
@@ -209,7 +206,7 @@ form input[type="submit"]:hover {
 }
 
 .card:hover {
-    transform: scale(1.05);
+    transform: scale(1.01);
     text-shadow: inherit;
     box-shadow: 0 0 10px rgba(162, 98, 57, 0.75);
     transition: all 0.3s ease;

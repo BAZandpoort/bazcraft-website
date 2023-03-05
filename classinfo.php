@@ -2,8 +2,20 @@
 session_start();
 include "auth.php";
 include 'dal.php';
-$users = get_users();
-rsort($users);
+$classes = getClasses();
+
+// Define the sort function
+function sortClasses($a, $b) {
+    if ($a['current'] != $b['current']) {
+        return ($a['current'] < $b['current']) ? 1 : -1;
+    } else {
+        return ($a['used'] < $b['used']) ? 1 : -1;
+    }
+}
+
+// Sort the classes array
+usort($classes, "sortClasses");
+
 ?>
 
 
@@ -11,7 +23,7 @@ rsort($users);
 <html lang="en">
 <head>
     <link rel="stylesheet" href="css/main.css">
-    <meta http-equiv="refresh" content="15">
+    <meta http-equiv="refresh" content="10">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,22 +34,22 @@ rsort($users);
 
 
 <?php
-if (empty($users)) {
+if (empty($classes)) {
     echo '<div class="center">';
     echo '<span class="no-data-text center">No data to display :(</span>';
     echo '</div>';
 } else {
-    foreach ($users as $user) {
+    foreach ($classes as $class) {
         echo '<div class="card">';
-        echo '<h2 class="card-text">' . $user['playername'] . '</h2>';
-        echo '<p class="card-text"><strong>Room:</strong> ' . getPlayerRoom($user['id']) . '</p>';
-        echo '<p class="card-text"><strong>Age:</strong> ' . $user['age'] . '</p>';
-        echo '<p class="card-text"><strong>ID:</strong> ' . $user['id'] . '</p>';
+        echo '<h2 class="card-text">' . $class["class"] . '</h2>';
+        echo '<p class="card-text"><strong>Current:</strong> ' . $class['current'] . '</p>';
+        echo '<p class="card-text"><strong>Times used:</strong> ' . $class['used'] . '</p>';
         echo '</div>';
     }
 }
-?>
 
+
+?>
 <div class="button-container">
     <button class="dashboard-button button-primary" onclick="window.location.href='dashboard.php'">📖 Dashboard</button>
 </div>
