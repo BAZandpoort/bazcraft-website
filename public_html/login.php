@@ -15,10 +15,10 @@ session_start();
 </head>
 <body>
     <?php
-    
+
+
     if (isset($_SESSION["wrong_creds"])) {
         echo '<script>toastr.error("The username or password was incorrect.")</script>';
-        unset($_SESSION["username"]);
         unset($_SESSION["password"]);
         session_destroy();
     }

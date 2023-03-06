@@ -1,7 +1,9 @@
 <?php
 session_start();
 
-include "auth.php";
+include "../includes/auth.php";
+include "../includes/rbac.php";
+isAuthenticated(true);
 
 ?>
 <!DOCTYPE html>
@@ -26,7 +28,7 @@ include "auth.php";
 
     ?>
     <h1 class="center">🚀 Dashboard - BA Zandpoort</h1>
-    <h3 class="center">👋 Welcome, <?php echo $_SESSION["username"]; ?></h3>
+    <h3 class="center">👋 Welcome, <?php echo $_SESSION["username"]; ?> (<?php echo getRole(getUserRole(getUserId($_SESSION["username"]))) ?>) </h3>
 
 
     <div class="button-container">
