@@ -44,7 +44,7 @@ function getPlayerRoom($playerId)
     $conn = connectToDatabase("bazandpoort");
 
 
-    $sql = "SELECT room FROM score WHERE id = ?"; // parameterized query (player_id = ?) allows us to pass in a value for the ? placeholder when executing the query
+    $sql = "SELECT currentregion FROM players WHERE id = ?"; // parameterized query (player_id = ?) allows us to pass in a value for the ? placeholder when executing the query
     // to prevent possible SQL injections
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $playerId);
@@ -53,7 +53,7 @@ function getPlayerRoom($playerId)
 
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
-        return $row["room"];
+        return $row["currentregion"] ?? "Hallways";
     }
     return null;
 
