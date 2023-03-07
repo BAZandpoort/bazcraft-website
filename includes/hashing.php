@@ -1,4 +1,5 @@
 <?php
+/** @noinspection GrazieInspection */
 if (!function_exists('connectToDatabase')) {
     include "../includes/dal.php";
 }
@@ -12,8 +13,6 @@ function createSalt(): string
 }
 
 
-
-
 // Verify if passwords matched by checking a hashed version against the hashed version in the database
 function verifyPassword($id, $password): bool
 {
@@ -22,8 +21,8 @@ function verifyPassword($id, $password): bool
 }
 
 // Hash a password using the Argon2i algorithm
-function hashPassword($password) {
+function hashPassword($password)
+{
     return password_hash($password, PASSWORD_ARGON2I);
 }
 
-?>

@@ -1,8 +1,8 @@
 <?php
 
 
-
-function isAuthenticated($redirect) {
+function isAuthenticated($redirect)
+{
     if (!isset($_SESSION["authenticated"])) {
         if ($redirect) {
             header("Location: login.php");
@@ -17,4 +17,4 @@ function isAuthenticated($redirect) {
 
 
 
-?>
+

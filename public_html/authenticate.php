@@ -7,12 +7,6 @@ include "../includes/hashing.php";
 include "../includes/rbac.php";
 
 
-
-
-
-
-
-
 if (!(isset($_POST["username"]) || isset($_POST["password"]))) {
     header("Location:login.php");
     return;
@@ -29,8 +23,7 @@ $hashedPassword = hashPassword($authpassword . $salt);
 $verified = verifyPassword(getUserId($authusername), $authpassword);
 
 
-
-if ($verified){
+if ($verified) {
     $_SESSION["authenticated"] = true;
     $_SESSION["username"] = $authusername;
     $_SESSION["role"] = getRoleString(getUserRole(getUserId($_SESSION["username"])));
@@ -51,4 +44,3 @@ unset($salt);
 return;
 
 
-?>

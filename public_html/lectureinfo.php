@@ -5,7 +5,8 @@ isAuthenticated(true);
 include '../includes/dal.php';
 $lectures = getLectureData();
 // Define the sort function
-function sortLectures($a, $b) {
+function sortLectures($a, $b): int
+{
     return ($a['using'] < $b['using']) ? 1 : -1;
 }
 
@@ -25,7 +26,6 @@ usort($lectures, "sortLectures");
     <title>Dashboard - BA Zandpoort</title>
 </head>
 <body>
-
 
 
 <?php

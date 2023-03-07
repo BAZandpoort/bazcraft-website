@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $registrationKey = $_POST["key"];
 
     // check the registration key with the function from dal.php
-    $keyExists = checkRegistrationKey($registrationKey);
+    $keyExists = keyExists($registrationKey);
     // stop when the key doesn't exist
     if (!$keyExists) {
         header("Location:register.php");
@@ -32,9 +32,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $username = $_POST["username"];
     $password = $_POST["password"];
     $salt = createSalt();
-    $hashedPassword = hashPassword($password, $salt);
+    $hashedPassword = hashPassword($password);
     usedRegistrationKey($registrationKey);
-    $id = createUser($username, $hashedPassword, $salt, "" , $registrationKey);
+    $id = createUser($username, $hashedPassword, $salt, "", $registrationKey);
 
 
     // make sure to keep things safe and delete variables that contain their password or hashed password
@@ -53,8 +53,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <html lang="en">
 <head>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+            integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
+          integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <link rel="stylesheet" href="css/main.css">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -65,14 +69,20 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <h1 class="center">Account creation 📝</h1>
 <form action="register.php" method="post">
 
-    <label for="username">Username</label>
-    <input type="text" name="username" required>
+    <label>
+        Username
+        <input type="text" name="username" required>
+    </label>
 
-    <label for="password">Password</label>
-    <input type="password" name="password" required>
+    <label>
+        Password
+        <input type="password" name="password" required>
+    </label>
 
-    <label for="password">Registration key</label>
-    <input type="password" name="key" required>
+    <label>
+        Registration key
+        <input type="password" name="key" required>
+    </label>
 
 
     <input type="submit" value="Register 🔑">

@@ -1,8 +1,3 @@
-
-
-
-
-
 /* Default font family & dark mode*/
 body {
     font-family: 'Roboto', sans-serif;
@@ -22,6 +17,7 @@ a:hover {
     color: #1E90FF;
     text-decoration: underline;
 }
+
 /* class to be able to center text yesyes */
 .center {
     text-align: center;
@@ -42,7 +38,7 @@ a:hover {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
-.dashboard-button{
+.dashboard-button {
     width: 100%;
     display: inline-block;
     padding: 12px 24px;
@@ -145,8 +141,6 @@ footer {
 }
 
 
-
-
 /* Form styling */
 form {
     max-width: 400px;
@@ -201,22 +195,7 @@ form input[type="submit"]:hover {
 
 
 
-/* Make form dropdowns the same as buttons */
-form select {
-    font-size: 16px;
-    font-weight: bold;
-    text-align: center;
-    text-decoration: none;
-    display: block;
-    width: 100%;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    background-color: #323232;
-    color: #eee;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
+
 /* add a hover effect that makes the dropdowns look like buttons */
 form select:hover {
     background-color: #460df2;
@@ -246,7 +225,6 @@ form select:hover {
 }
 
 
-
 .card img {
     width: 100%;
     height: 200px;
@@ -264,6 +242,7 @@ form select:hover {
 .card strong {
     font-weight: bold;
 }
+
 .card-text {
     color: #fff;
     text-shadow: 0.2px 0.2px 0.2px #000;
