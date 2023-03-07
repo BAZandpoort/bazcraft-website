@@ -16,11 +16,19 @@ session_start();
 <body>
     <?php
 
-
+    // if the user just tried to log in but failed
     if (isset($_SESSION["wrong_creds"])) {
         echo '<script>toastr.error("The username or password was incorrect.")</script>';
         unset($_SESSION["password"]);
         session_destroy();
+    } // if the user just registered
+    else if (isset($_SESSION["registered"])) {
+        echo '<script>toastr.success("You have successfully registered!")</script>';
+        unset($_SESSION["registered"]);
+    } // if the user just logged out
+    else if (isset($_SESSION["logged_out"])) {
+        echo '<script>toastr.success("You have successfully logged out!")</script>';
+        unset($_SESSION["logged_out"]);
     }
 
     ?>
@@ -32,7 +40,7 @@ session_start();
         <input type="password" name="password" required>
         <input type="submit" value="Log-in 🔑">
     </form>
-
+    <p class="center">Don't have an account yet? <a href="register.php">Register here</a></p>
     <footer>
         <p>&copy; 2023 BA Zandpoort</p>
     </footer>

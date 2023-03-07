@@ -34,6 +34,7 @@ if (!(getRoleInt($_SESSION['role']) == 2)) {
 <div class="button-container">
 
     <button class="dashboard-button button-special2" onclick="window.location.href='managekeys.php'">🔑 Key management</button>
+    <button class="dashboard-button button-special" onclick="window.location.href='../dashboard.php'">🏠 Main page</button>
 
 </div>
 

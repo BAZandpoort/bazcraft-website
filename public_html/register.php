@@ -33,16 +33,17 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $password = $_POST["password"];
     $salt = createSalt();
     $hashedPassword = hashPassword($password, $salt);
-    // create a new user with the function from dal.php
-    $id = createUser($username, $hashedPassword, $salt, $registrationKey);
+    usedRegistrationKey($registrationKey);
+    $id = createUser($username, $hashedPassword, $salt, "" , $registrationKey);
 
 
     // make sure to keep things safe and delete variables that contain their password or hashed password
     unset($password);
     unset($hashedPassword);
 
-
-
+    // redirect the user to the login page
+    $_SESSION["registered"] = true;
+    header("Location:login.php");
 
 }
 

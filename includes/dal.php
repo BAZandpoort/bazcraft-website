@@ -12,12 +12,12 @@ function connectToDatabase($dbname) {
     $conn = mysqli_init();
 
     $conn->options(MYSQLI_OPT_SSL_VERIFY_SERVER_CERT, true);
-    $conn->ssl_set(NULL, NULL, "C:\Users\IBABE\bazandpoort-ca-certificate.crt", NULL, NULL);
+    $conn->ssl_set(NULL, NULL, "C:\Users\IBABE\bazandpoort-ca-certificate.crt", NULL, NULL); // Replace with your own path to the certificate
     $conn->real_connect($servername, $username, $password, $dbname);
     mysqli_set_charset($conn, "utf8");
     // Check connection
     if (!$conn) {
-        die("Connection failed: " . mysqli_connect_error());
+        die("Connection failed: ");
     }
     return $conn;
 }
@@ -135,12 +135,12 @@ function getUser($id) {
 
 // create a new user in the database
 
-function createUser($username, $password, $salt, $twoFactor) {
-
+function createUser($username, $password, $salt, $twoFactor, $registration_key) {
+    //createUser($username, $hashedPassword, $salt, "" , $registrationKey);
     $conn = connectToDatabase("credentials");
-    $sql = "INSERT INTO `credentials`.`users` (username, password, 2fa, salt) VALUES (?, ?, ?, ?)";
+    $sql = "INSERT INTO `credentials`.`users` (username, password, 2fa, salt, role, invitedby) VALUES (?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssss", $username, $password, $twoFactor, $salt);
+    $stmt->bind_param("ssssis", $username, $password, $twoFactor, $salt, getKeyInfo($registration_key)["role"], getKeyInfo($registration_key)["createdby"]);
     $stmt->execute();
     return $stmt->get_result();
 }
@@ -157,13 +157,18 @@ function checkRegistrationKey($registration_key): bool
     $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
-        $sql = "DELETE FROM registration_keys.`keys` WHERE `key` = ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("s", $registration_key);
-        $stmt->execute();
         return true;
     }
     return false;
+}
+
+function usedRegistrationKey($registration_key) {
+    // set "used" to true in the database
+    $conn = connectToDatabase("registration_keys");
+    $sql = "UPDATE registration_keys.`keys` SET used = 1 WHERE `key` = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $registration_key);
+    $stmt->execute();
 }
 
 
@@ -201,14 +206,30 @@ function getKeyRole($registration_key) {
 
 }
 
+function getKeyInfo($registration_key) {
+
+    $conn = connectToDatabase("registration_keys");
+    $sql = "SELECT * FROM registration_keys.`keys` WHERE `key` = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $registration_key);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        return $result->fetch_assoc();
+    }
+    return null;
+
+}
+
 // create a new key with role values: 0 = guest, 1 = user, 2 = admin
-function createKey($role) {
+function createKey($role, $createdby) {
 
     $conn = connectToDatabase("registration_keys");
     $key = bin2hex(random_bytes(32));
-    $sql = "INSERT INTO `registration_keys`.`keys` (`key`, role) VALUES (?, ?)";
+    $sql = "INSERT INTO `registration_keys`.`keys` (`key`, role, createdby) VALUES (?, ?, ?)";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("si", $key, $role);
+    $stmt->bind_param("sis", $key, $role, $createdby);
     $stmt->execute();
     return $key;
 }
@@ -227,6 +248,33 @@ function getRegistrationKeys() {
     }
     return array();
 
+
+}
+
+function keyExists($key) {
+
+    $conn = connectToDatabase("registration_keys");
+    $sql = "SELECT `key` FROM registration_keys.`keys` WHERE `key` = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $key);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        return true;
+    }
+    return false;
+
+}
+
+function deleteKey($key) {
+
+    $conn = connectToDatabase("registration_keys");
+    $sql = "DELETE FROM registration_keys.`keys` WHERE `key` = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $key);
+    $stmt->execute();
+    return $stmt->get_result();
 
 }
 

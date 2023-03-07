@@ -4,7 +4,7 @@ include "../../includes/auth.php";
 isAuthenticated(true);
 include "../../includes/rbac.php";
 include "../../includes/dal.php";
-$keys = getRegistrationKeys();
+
 // Check if user is admin using rbac.php functions
 if (!(getRoleInt($_SESSION['role']) == 2)) {
 
@@ -14,11 +14,25 @@ if (!(getRoleInt($_SESSION['role']) == 2)) {
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $role = $_POST["role"];
-    $role = getRoleInt($role);
-    $key = createKey($role);
-    exit();
+
+    // check if key exists
+    if (isset($_POST["key"])) {
+        $key = $_POST["key"];
+        if (!keyExists($key) && isset($_POST["deleteKey"])) {
+            exit();
+        }
+    }
+    // check for key creating or deletion
+    if (isset($_POST["createKey"])) {
+        $role = $_POST["role"];
+        $role = getRoleInt($role);
+        $key = createKey($role, $_SESSION["username"]);
+    } else if (isset($_POST["deleteKey"])) {
+        deleteKey($_POST["key"]);
+    }
 }
+
+$keys = getRegistrationKeys();
 
 ?>
 
@@ -46,6 +60,11 @@ Create a html page that allows the user to select a role and upon pressing "gene
 <body>
 <h1 class="center">🚀 Admin Panel - BA Zandpoort</h1>
 <h3 class="center">👋 Welcome, <?php echo $_SESSION["username"]; ?> (<?php echo $_SESSION['role'] ?>) </h3>
+<div class="button-container">
+    <button class="dashboard-button button-special" onclick="window.location.href='adminpanel.php'">👨‍💻 Admin panel</button>
+    <!--<button class="dashboard-button button-special" onclick="window.location.href='manageusers.php'">👨‍💻 Manage users</button>-->
+
+</div>
 
 <!-- create a form that allows the user to pick from "admin", "user", "guest"-->
 <form action="managekeys.php" method="post">
@@ -55,14 +74,32 @@ Create a html page that allows the user to select a role and upon pressing "gene
         <option value="guest">Guest</option>
     </select>
     <br>
-    <input type="submit" value="Generate">
+    <input type="submit" name='createKey' value="Generate">
 
 </form>
 
 <?php
 
 foreach ($keys as $key) {
-    echo "<p class='center'>" . $key["key"] . " - " . getRoleString($key["role"]) . "</p>";
+    if (!$key["used"]) {
+        echo "
+        <table>
+        <tr>
+        ";
+            echo "<td>" . $key["key"] . " - type: " . getRoleString($key["role"]) . " - created: " . $key["createdby"] ."</td>";
+            // send a post request to delete key
+            echo "<form action='managekeys.php' method='post'>";
+            echo "<input type='hidden' name='key' value='" . $key["key"] . "'>";
+            echo "<td><input type='submit' name='deleteKey' value='Delete'></td>";
+            echo "</form>";
+            echo "
+        </tr>
+        </table>
+        ";
+    }
+
+
+
 }
 
 ?>
