@@ -194,7 +194,22 @@ form input[type="submit"]:hover {
 }
 
 
-
+/* Make form dropdowns the same as buttons */
+form select {
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #323232;
+    color: #eee;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
 
 /* add a hover effect that makes the dropdowns look like buttons */
 form select:hover {
