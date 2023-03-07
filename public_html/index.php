@@ -8,13 +8,13 @@
     <title>Minecraft - BA Zandpoort</title>
 </head>
 <body>
-    <h1 class="center">Welkom op de BA Zandpoort website voor de Minecraft server!</h1>
-    <p>Deze website wordt gebruikt om de spelers op de server te helpen.</p>
-    <p>Voor dat je iets kan doen moet je eerst <a href="login.php">inloggen</a></p>
+<h1 class="center">Welkom op de BA Zandpoort website voor de Minecraft server!</h1>
+<p>Deze website wordt gebruikt om de spelers op de server te helpen.</p>
+<p>Voor dat je iets kan doen moet je eerst <a href="login.php">inloggen</a></p>
 
 
-    <footer>
-        <p>&copy; 2023 BA Zandpoort</p>
-    </footer>
+<footer>
+    <p>&copy; 2023 BA Zandpoort</p>
+</footer>
 </body>
 </html>

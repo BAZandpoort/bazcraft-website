@@ -21,7 +21,6 @@ rsort($users);
 <body>
 
 
-
 <?php
 if (empty($users)) {
     echo '<div class="center">';

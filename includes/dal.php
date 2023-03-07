@@ -1,9 +1,8 @@
 <?php
 
 
-
-
-function connectToDatabase($dbname) {
+function connectToDatabase($dbname)
+{
     $servername = "lin-17544-10111-mysql-primary.servers.linodedb.net";
     $username = "linroot";
     $password = "2l395YaLc8l!bqLy";
@@ -16,21 +15,19 @@ function connectToDatabase($dbname) {
     $conn->real_connect($servername, $username, $password, $dbname);
     mysqli_set_charset($conn, "utf8");
     // Check connection
-    if (!$conn) {
-        die("Connection failed: ");
-    }
     return $conn;
 }
 
 
-function get_users() {
+function get_users(): array
+{
     $conn = connectToDatabase("bazandpoort");
     $sql = "SELECT * FROM players";
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
         // output data of each row
         $users = array();
-        while($row = $result->fetch_assoc()) {
+        while ($row = $result->fetch_assoc()) {
             $users[] = $row;
         }
         return $users;
@@ -39,9 +36,10 @@ function get_users() {
 
 }
 
-function getPlayerRoom($playerId) {
+function getPlayerRoom($playerId)
+{
 
-    //$conn = getDatabaseConnection();  I wanted to use a function called getDatabaseConnection() that returns a connection object but I was too lazy to make it
+    //$conn = getDatabaseConnection();  I wanted to use a function called getDatabaseConnection() that returns a connection object, but I was too lazy to make it
     // and ended up just using the $conn variable 🗿
     $conn = connectToDatabase("bazandpoort");
 
@@ -62,7 +60,8 @@ function getPlayerRoom($playerId) {
 }
 
 
-function getLectureData() {
+function getLectureData(): array
+{
 
     $conn = connectToDatabase("bazandpoort");
 
@@ -71,7 +70,7 @@ function getLectureData() {
     if ($result->num_rows > 0) {
         // output data of each row
         $lectures = array();
-        while($row = $result->fetch_assoc()) {
+        while ($row = $result->fetch_assoc()) {
             $lectures[] = $row;
         }
         return $lectures;
@@ -81,7 +80,8 @@ function getLectureData() {
 
 }
 
-function getClasses() {
+function getClasses(): array
+{
     $conn = connectToDatabase("bazandpoort");
 
     $sql = "SELECT * FROM classes";
@@ -89,7 +89,7 @@ function getClasses() {
     if ($result->num_rows > 0) {
         // output data of each row
         $lectures = array();
-        while($row = $result->fetch_assoc()) {
+        while ($row = $result->fetch_assoc()) {
             $lectures[] = $row;
         }
         return $lectures;
@@ -100,7 +100,8 @@ function getClasses() {
 
 
 // create a function to resolve the user id from username
-function getUserId($username) {
+function getUserId($username)
+{
 
     $conn = connectToDatabase("credentials");
 
@@ -118,7 +119,8 @@ function getUserId($username) {
 }
 
 // get a user from the database using the id
-function getUser($id) {
+function getUser($id)
+{
     $conn = connectToDatabase("credentials");
     $sql = "SELECT * FROM users WHERE id = ?";
     $stmt = $conn->prepare($sql);
@@ -135,7 +137,8 @@ function getUser($id) {
 
 // create a new user in the database
 
-function createUser($username, $password, $salt, $twoFactor, $registration_key) {
+function createUser($username, $password, $salt, $twoFactor, $registration_key)
+{
     //createUser($username, $hashedPassword, $salt, "" , $registrationKey);
     $conn = connectToDatabase("credentials");
     $sql = "INSERT INTO `credentials`.`users` (username, password, 2fa, salt, role, invitedby) VALUES (?, ?, ?, ?, ?, ?)";
@@ -146,23 +149,8 @@ function createUser($username, $password, $salt, $twoFactor, $registration_key) 
 }
 
 
-// create a function to check if a registration key exists in a database and if it does return true and delete the key from the database
-function checkRegistrationKey($registration_key): bool
+function usedRegistrationKey($registration_key)
 {
-    $conn = connectToDatabase("registration_keys");
-    $sql = "SELECT `key` FROM registration_keys.`keys` WHERE `key` = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("s", $registration_key);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    if ($result->num_rows > 0) {
-        return true;
-    }
-    return false;
-}
-
-function usedRegistrationKey($registration_key) {
     // set "used" to true in the database
     $conn = connectToDatabase("registration_keys");
     $sql = "UPDATE registration_keys.`keys` SET used = 1 WHERE `key` = ?";
@@ -172,7 +160,8 @@ function usedRegistrationKey($registration_key) {
 }
 
 
-function getUserRole($id) {
+function getUserRole($id)
+{
 
     $conn = connectToDatabase("credentials");
     $sql = "SELECT role FROM users WHERE id = ?";
@@ -189,24 +178,29 @@ function getUserRole($id) {
 }
 
 
-function getKeyRole($registration_key) {
+// --Commented out by Inspection START (07/03/2023 21:15):
+//function getKeyRole($registration_key)
+//{
+//
+//    $conn = connectToDatabase("registration_keys");
+//    $sql = "SELECT role FROM registration_keys.`keys` WHERE `key` = ?";
+//    $stmt = $conn->prepare($sql);
+//    $stmt->bind_param("s", $registration_key);
+//    $stmt->execute();
+//    $result = $stmt->get_result();
+//
+//    if ($result->num_rows > 0) {
+//        $row = $result->fetch_assoc();
+//        return $row["role"];
+//    }
+//    return null;
+//
+//}
+// --Commented out by Inspection STOP (07/03/2023 21:15)
 
-    $conn = connectToDatabase("registration_keys");
-    $sql = "SELECT role FROM registration_keys.`keys` WHERE `key` = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("s", $registration_key);
-    $stmt->execute();
-    $result = $stmt->get_result();
 
-    if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-        return $row["role"];
-    }
-    return null;
-
-}
-
-function getKeyInfo($registration_key) {
+function getKeyInfo($registration_key)
+{
 
     $conn = connectToDatabase("registration_keys");
     $sql = "SELECT * FROM registration_keys.`keys` WHERE `key` = ?";
@@ -223,10 +217,14 @@ function getKeyInfo($registration_key) {
 }
 
 // create a new key with role values: 0 = guest, 1 = user, 2 = admin
-function createKey($role, $createdby) {
+function createKey($role, $createdby): string
+{
 
     $conn = connectToDatabase("registration_keys");
-    $key = bin2hex(random_bytes(32));
+    try {
+        $key = bin2hex(random_bytes(32));
+    } catch (Exception $e) {
+    }
     $sql = "INSERT INTO `registration_keys`.`keys` (`key`, role, createdby) VALUES (?, ?, ?)";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("sis", $key, $role, $createdby);
@@ -234,14 +232,15 @@ function createKey($role, $createdby) {
     return $key;
 }
 
-function getRegistrationKeys() {
+function getRegistrationKeys(): array
+{
 
     $conn = connectToDatabase("registration_keys");
     $sql = "SELECT * FROM registration_keys.`keys`";
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
         $keys = array();
-        while($row = $result->fetch_assoc()) {
+        while ($row = $result->fetch_assoc()) {
             $keys[] = $row;
         }
         return $keys;
@@ -251,7 +250,8 @@ function getRegistrationKeys() {
 
 }
 
-function keyExists($key) {
+function keyExists($key): bool
+{
 
     $conn = connectToDatabase("registration_keys");
     $sql = "SELECT `key` FROM registration_keys.`keys` WHERE `key` = ?";
@@ -267,7 +267,8 @@ function keyExists($key) {
 
 }
 
-function deleteKey($key) {
+function deleteKey($key)
+{
 
     $conn = connectToDatabase("registration_keys");
     $sql = "DELETE FROM registration_keys.`keys` WHERE `key` = ?";
@@ -278,4 +279,4 @@ function deleteKey($key) {
 
 }
 
-?>
+

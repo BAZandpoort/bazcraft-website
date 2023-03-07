@@ -6,7 +6,8 @@ include '../includes/dal.php';
 $classes = getClasses();
 
 // Define the sort function
-function sortClasses($a, $b) {
+function sortClasses($a, $b): int
+{
     if ($a['current'] != $b['current']) {
         return ($a['current'] < $b['current']) ? 1 : -1;
     } else {
@@ -31,7 +32,6 @@ usort($classes, "sortClasses");
     <title>Dashboard - BA Zandpoort</title>
 </head>
 <body>
-
 
 
 <?php
