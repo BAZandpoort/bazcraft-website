@@ -201,4 +201,33 @@ function getKeyRole($registration_key) {
 
 }
 
+// create a new key with role values: 0 = guest, 1 = user, 2 = admin
+function createKey($role) {
+
+    $conn = connectToDatabase("registration_keys");
+    $key = bin2hex(random_bytes(32));
+    $sql = "INSERT INTO `registration_keys`.`keys` (`key`, role) VALUES (?, ?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("si", $key, $role);
+    $stmt->execute();
+    return $key;
+}
+
+function getRegistrationKeys() {
+
+    $conn = connectToDatabase("registration_keys");
+    $sql = "SELECT * FROM registration_keys.`keys`";
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+        $keys = array();
+        while($row = $result->fetch_assoc()) {
+            $keys[] = $row;
+        }
+        return $keys;
+    }
+    return array();
+
+
+}
+
 ?>

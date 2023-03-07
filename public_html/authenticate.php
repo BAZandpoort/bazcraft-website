@@ -4,7 +4,7 @@ session_start();
 include "../includes/auth.php";
 include "../includes/dal.php";
 include "../includes/hashing.php";
-
+include "../includes/rbac.php";
 
 
 
@@ -33,6 +33,7 @@ $verified = verifyPassword(getUserId($authusername), $authpassword);
 if ($verified){
     $_SESSION["authenticated"] = true;
     $_SESSION["username"] = $authusername;
+    $_SESSION["role"] = getRoleString(getUserRole(getUserId($_SESSION["username"])));
     header("Location:dashboard.php");
 } else {
     $_SESSION["wrong_creds"] = true;

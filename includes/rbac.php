@@ -4,12 +4,16 @@
 $roles = array("guest", "user", "admin");
 
 
-include "../includes/dal.php";
 
+// function that converts a role to an int role from the list
+function getRoleInt($role) {
+    global $roles;
+    return array_search($role, $roles);
+}
 
 
 // function that converts an int role to a role from the list
-function getRole($role) {
+function getRoleString($role) {
     global $roles;
     return $roles[$role];
 }

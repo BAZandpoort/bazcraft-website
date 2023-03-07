@@ -8,6 +8,7 @@ body {
     font-family: 'Roboto', sans-serif;
     background-color: #222;
     color: #eee;
+    margin-bottom: 75px; /* For the footer */
 }
 
 /* set links to a different color */
@@ -68,6 +69,17 @@ a:hover {
     color: inherit;
 }
 
+.button-special:hover {
+    text-decoration: none;
+    background-color: #FFA500FF;
+    color: inherit;
+}
+
+.button-special2:hover {
+    text-decoration: none;
+    background-color: #5e00ff;
+    color: inherit;
+}
 
 /* style the header */
 header {
@@ -129,6 +141,7 @@ footer {
     bottom: 0;
     left: 0;
     right: 0;
+    height: 75px;
 }
 
 
@@ -188,6 +201,26 @@ form input[type="submit"]:hover {
 
 
 
+/* Make form dropdowns the same as buttons */
+form select {
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #323232;
+    color: #eee;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+/* add a hover effect that makes the dropdowns look like buttons */
+form select:hover {
+    background-color: #460df2;
+}
 
 .card {
     display: inline-block;
