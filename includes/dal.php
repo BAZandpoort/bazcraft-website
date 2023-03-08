@@ -10,8 +10,8 @@ function connectToDatabase($dbname)
 
     $conn = mysqli_init();
 
-    $conn->options(MYSQLI_OPT_SSL_VERIFY_SERVER_CERT, true);
-    $conn->ssl_set(NULL, NULL, "path/to/certificate/bazandpoort-ca-certificate.crt", NULL, NULL); // Replace with your own path to the certificate
+    //$conn->options(MYSQLI_OPT_SSL_VERIFY_SERVER_CERT, true);
+    //$conn->ssl_set(NULL, NULL, "path/to/certificate/bazandpoort-ca-certificate.crt", NULL, NULL); // Replace with your own path to the certificate
     $conn->real_connect($servername, $username, $password, $dbname);
     mysqli_set_charset($conn, "utf8");
     // Check connection
