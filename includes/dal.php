@@ -3,15 +3,15 @@
 
 function connectToDatabase($dbname)
 {
-    $servername = "lin-17544-10111-mysql-primary.servers.linodedb.net";
-    $username = "linroot";
-    $password = "2l395YaLc8l!bqLy";
+    $servername = "10.43.36.5";
+    $username = "root";
+    $password = "Fruitsla!123";
     // Create connection
 
     $conn = mysqli_init();
 
     $conn->options(MYSQLI_OPT_SSL_VERIFY_SERVER_CERT, true);
-    $conn->ssl_set(NULL, NULL, "C:\Users\IBABE\bazandpoort-ca-certificate.crt", NULL, NULL); // Replace with your own path to the certificate
+    $conn->ssl_set(NULL, NULL, "path/to/certificate/bazandpoort-ca-certificate.crt", NULL, NULL); // Replace with your own path to the certificate
     $conn->real_connect($servername, $username, $password, $dbname);
     mysqli_set_charset($conn, "utf8");
     // Check connection
