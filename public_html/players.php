@@ -33,7 +33,6 @@ if (empty($users)) {
         echo '<p class="card-text"><strong>Account:</strong> ' . $user['playername'] . '</p>';
         echo '<p class="card-text"><strong>Room:</strong> ' . getPlayerRoom($user['id']) . '</p>';
         echo '<p class="card-text"><strong>Age:</strong> ' . $user['age'] . '</p>';
-        echo '<p class="card-text"><strong>ID:</strong> ' . $user['id'] . '</p>';
         echo '</div>';
     }
 }
