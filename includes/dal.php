@@ -44,7 +44,7 @@ function getPlayerRoom($playerName)
     $conn = connectToDatabase("minecraft");
 
 
-    $sql = "SELECT currentregion FROM players WHERE playername = ?"; // parameterized query (player_id = ?) allows us to pass in a value for the ? placeholder when executing the query
+    $sql = "SELECT currentregion FROM players WHERE playername = ?"; // parameterized query (playername = ?) allows us to pass in a value for the ? placeholder when executing the query
     // to prevent possible SQL injections
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $playerName);
