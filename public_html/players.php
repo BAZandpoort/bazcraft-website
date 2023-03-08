@@ -31,8 +31,9 @@ if (empty($users)) {
         echo '<div class="card">';
         echo '<h2 class="card-text">' . $user['customname'] . '</h2>';
         echo '<p class="card-text"><strong>Account:</strong> ' . $user['playername'] . '</p>';
-        echo '<p class="card-text"><strong>Room:</strong> ' . getPlayerRoom($user['id']) . '</p>';
         echo '<p class="card-text"><strong>Age:</strong> ' . $user['age'] . '</p>';
+        echo '<p class="card-text"><strong>Room:</strong> ' . getPlayerRoom($user['playername']) . '</p>';
+        echo '<p class="card-text"><strong>Curent lecture:</strong> ' . $user['currentlecture'] . '</p>';
         echo '</div>';
     }
 }

@@ -3,15 +3,15 @@
 
 function connectToDatabase($dbname)
 {
-    $servername = "lin-17544-10111-mysql-primary.servers.linodedb.net";
-    $username = "linroot";
-    $password = "2l395YaLc8l!bqLy";
+    $servername = "10.43.36.5";
+    $username = "root";
+    $password = "Fruitsla!123";
     // Create connection
 
     $conn = mysqli_init();
 
     $conn->options(MYSQLI_OPT_SSL_VERIFY_SERVER_CERT, true);
-    $conn->ssl_set(NULL, NULL, "C:\Users\IBABE\bazandpoort-ca-certificate.crt", NULL, NULL); // Replace with your own path to the certificate
+    $conn->ssl_set(NULL, NULL, "path/to/certificate/bazandpoort-ca-certificate.crt", NULL, NULL); // Replace with your own path to the certificate
     $conn->real_connect($servername, $username, $password, $dbname);
     mysqli_set_charset($conn, "utf8");
     // Check connection
@@ -21,7 +21,7 @@ function connectToDatabase($dbname)
 
 function get_users(): array
 {
-    $conn = connectToDatabase("bazandpoort");
+    $conn = connectToDatabase("minecraft");
     $sql = "SELECT * FROM players";
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
@@ -36,18 +36,18 @@ function get_users(): array
 
 }
 
-function getPlayerRoom($playerId)
+function getPlayerRoom($playerName)
 {
 
     //$conn = getDatabaseConnection();  I wanted to use a function called getDatabaseConnection() that returns a connection object, but I was too lazy to make it
     // and ended up just using the $conn variable 🗿
-    $conn = connectToDatabase("bazandpoort");
+    $conn = connectToDatabase("minecraft");
 
 
-    $sql = "SELECT currentregion FROM players WHERE id = ?"; // parameterized query (player_id = ?) allows us to pass in a value for the ? placeholder when executing the query
+    $sql = "SELECT currentregion FROM players WHERE playername = ?"; // parameterized query (playername = ?) allows us to pass in a value for the ? placeholder when executing the query
     // to prevent possible SQL injections
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $playerId);
+    $stmt->bind_param("s", $playerName);
     $stmt->execute();
     $result = $stmt->get_result();
 
@@ -63,7 +63,7 @@ function getPlayerRoom($playerId)
 function getLectureData(): array
 {
 
-    $conn = connectToDatabase("bazandpoort");
+    $conn = connectToDatabase("minecraft");
 
     $sql = "SELECT * FROM lectures";
     $result = $conn->query($sql);
@@ -82,7 +82,7 @@ function getLectureData(): array
 
 function getClasses(): array
 {
-    $conn = connectToDatabase("bazandpoort");
+    $conn = connectToDatabase("minecraft");
 
     $sql = "SELECT * FROM classes";
     $result = $conn->query($sql);
