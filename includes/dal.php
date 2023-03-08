@@ -36,18 +36,18 @@ function get_users(): array
 
 }
 
-function getPlayerRoom($playerId)
+function getPlayerRoom($playerName)
 {
 
     //$conn = getDatabaseConnection();  I wanted to use a function called getDatabaseConnection() that returns a connection object, but I was too lazy to make it
     // and ended up just using the $conn variable 🗿
-    $conn = connectToDatabase("bazandpoort");
+    $conn = connectToDatabase("minecraft");
 
 
-    $sql = "SELECT currentregion FROM players WHERE id = ?"; // parameterized query (player_id = ?) allows us to pass in a value for the ? placeholder when executing the query
+    $sql = "SELECT currentregion FROM players WHERE playername = ?"; // parameterized query (player_id = ?) allows us to pass in a value for the ? placeholder when executing the query
     // to prevent possible SQL injections
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $playerId);
+    $stmt->bind_param("s", $playerName);
     $stmt->execute();
     $result = $stmt->get_result();
 
