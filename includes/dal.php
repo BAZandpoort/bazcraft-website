@@ -21,7 +21,7 @@ function connectToDatabase($dbname)
 
 function get_users(): array
 {
-    $conn = connectToDatabase("bazandpoort");
+    $conn = connectToDatabase("minecraft");
     $sql = "SELECT * FROM players";
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
@@ -63,7 +63,7 @@ function getPlayerRoom($playerId)
 function getLectureData(): array
 {
 
-    $conn = connectToDatabase("bazandpoort");
+    $conn = connectToDatabase("minecraft");
 
     $sql = "SELECT * FROM lectures";
     $result = $conn->query($sql);
@@ -82,7 +82,7 @@ function getLectureData(): array
 
 function getClasses(): array
 {
-    $conn = connectToDatabase("bazandpoort");
+    $conn = connectToDatabase("minecraft");
 
     $sql = "SELECT * FROM classes";
     $result = $conn->query($sql);
