@@ -3,7 +3,7 @@
 
 function connectToDatabase($dbname)
 {
-    $servername = "10.43.36.5";
+    $servername = "127.0.0.1"; // localhost (You can use your own IP address if you want to connect to a remote database)
     $username = "root";
     $password = "Fruitsla!123";
     // Create connection
