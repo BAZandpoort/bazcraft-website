@@ -1,35 +1,19 @@
 # BAZ Minecraft Website
+An easy to use administation panel for the BAZ Minecraft server that integrates with the BAZ Minecraft plugin [BAZCore](https://github.com/BAZandpoort/BAZCore).
 
-
-Administration panel for the BAZ Minecraft server.
-
-## Table of Contents
-
-- [Features](#Features)
-- [Authors](#Authors)
-
-
-
+---
 
 ## Features
-
 - Live view of players on the server
 - Live lecture and classes info
 - Key management
 - Secure password storing
 
+---
 
-## Authors
-
-- [@gato](https://github.com/PoesCat)
-- [@Cédric](https://github.com/CedricVerlinden)
-- [@J4spr](https://github.com/J4spr)
+## Contributors
+- [@DisECtRy](https://github.com/DisECtRy)
 
 
-## Made with
-
-- PHP
-
-
-![Logo](https://user-images.githubusercontent.com/64209400/224147106-d87804c9-b10e-47ee-953a-ec90de46198f.png)
-
+## License
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
